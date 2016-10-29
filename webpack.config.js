@@ -3,7 +3,7 @@ module.exports = {
     app: './app/index.js'
   },
   output: {
-    publicPath: '/assets',
+    publicPath: '/assets/',
     filename: '[name].js'
   },
   module: {
@@ -19,6 +19,7 @@ module.exports = {
     ],
   },
   devServer: {
+    host: '0.0.0.0',
 		contentBase: "./public"
   }
 };

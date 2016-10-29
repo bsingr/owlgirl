@@ -1,10 +1,10 @@
-module.exports = {
+ module.exports = {
   entry: {
     app: './app/index.js'
   },
   output: {
-    path: 'public/assets',
-    publicPath: '/assets/',
+    path: 'dist',
+    publicPath: '/dist/',
     filename: '[name].js'
   },
   module: {
@@ -21,6 +21,6 @@ module.exports = {
   },
   devServer: {
     host: '0.0.0.0',
-		contentBase: "./public"
+		contentBase: "./"
   }
 };

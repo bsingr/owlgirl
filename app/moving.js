@@ -20,6 +20,9 @@ class Moving extends React.Component {
         x: this.state.x + this.state.move.x,
         y: this.state.y + this.state.move.y,
       });
+      if (this.props.onUpdate) {
+        this.props.onUpdate(this.state.x, this.state.y);
+      }
     }, 0);
   }
   onKeyDown(e) {

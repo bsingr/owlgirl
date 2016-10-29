@@ -3,6 +3,7 @@ module.exports = {
     app: './app/index.js'
   },
   output: {
+    path: 'public/assets',
     publicPath: '/assets/',
     filename: '[name].js'
   },

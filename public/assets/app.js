@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/assets";
+/******/ 	__webpack_require__.p = "/assets/";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -56,6 +56,18 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _Owl = __webpack_require__(172);
+
+	var _Owl2 = _interopRequireDefault(_Owl);
+
+	var _Moving = __webpack_require__(173);
+
+	var _Moving2 = _interopRequireDefault(_Moving);
+
+	var _Minimap = __webpack_require__(174);
+
+	var _Minimap2 = _interopRequireDefault(_Minimap);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -67,19 +79,51 @@
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
 
-	  function App() {
+	  function App(props) {
 	    _classCallCheck(this, App);
 
-	    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+	    _this.state = {
+	      out: false,
+	      position: { x: 0, y: 0 }
+	    };
+	    return _this;
 	  }
 
 	  _createClass(App, [{
+	    key: 'onMove',
+	    value: function onMove(x, y) {
+	      var out = false;
+	      if (this.state.position.x < -50 || this.state.position.x > window.innerWidth || this.state.position.y < -50 || this.state.position.y > window.innerHeight) {
+	        out = true;
+	      }
+	      this.setState({
+	        out: out,
+	        position: { x: x, y: y }
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var message = false;
+	      if (this.state.out) {
+	        message = _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Congraz! U broke out!'
+	        );
+	      }
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'Hello'
+	        message,
+	        _react2.default.createElement(_Minimap2.default, this.state.position),
+	        _react2.default.createElement(
+	          _Moving2.default,
+	          { onUpdate: this.onMove.bind(this) },
+	          _react2.default.createElement(_Owl2.default, null)
+	        )
 	      );
 	    }
 	  }]);
@@ -21455,6 +21499,175 @@
 
 	module.exports = ReactDOMNullInputValuePropHook;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	module.exports = function () {
+	  return _react2.default.createElement(
+	    'svg',
+	    { width: '100', height: '110' },
+	    _react2.default.createElement('path', { d: 'M 0,0 C 0,90, 20,100, 50,100 C 80,100, 100,90, 100,0 C 80,20, 50,20, 50,20 C 50,20, 20,20, 0,0',
+	      fill: 'green' }),
+	    _react2.default.createElement('path', { d: 'M 43,55 L 50,75, 57,55 Z', fill: 'black' }),
+	    _react2.default.createElement('circle', { cx: '29', cy: '40', r: '20', fill: 'yellow' }),
+	    _react2.default.createElement('circle', { cx: '33', cy: '40', r: '10', fill: 'black' }),
+	    _react2.default.createElement('circle', { cx: '71', cy: '40', r: '20', fill: 'yellow' }),
+	    _react2.default.createElement('circle', { cx: '67', cy: '40', r: '10', fill: 'black' }),
+	    _react2.default.createElement('ellipse', { cx: '20', cy: '95', rx: '3', ry: '8', fill: 'black' }),
+	    _react2.default.createElement('ellipse', { cx: '25', cy: '95', rx: '3', ry: '8', fill: 'black' }),
+	    _react2.default.createElement('ellipse', { cx: '30', cy: '95', rx: '3', ry: '8', fill: 'black' }),
+	    _react2.default.createElement('ellipse', { cx: '70', cy: '95', rx: '3', ry: '8', fill: 'black' }),
+	    _react2.default.createElement('ellipse', { cx: '75', cy: '95', rx: '3', ry: '8', fill: 'black' }),
+	    _react2.default.createElement('ellipse', { cx: '80', cy: '95', rx: '3', ry: '8', fill: 'black' })
+	  );
+	};
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var keys = {
+	  left: 37,
+	  up: 38,
+	  right: 39,
+	  down: 40
+	};
+
+	var Moving = function (_React$Component) {
+	  _inherits(Moving, _React$Component);
+
+	  function Moving(props) {
+	    _classCallCheck(this, Moving);
+
+	    var _this = _possibleConstructorReturn(this, (Moving.__proto__ || Object.getPrototypeOf(Moving)).call(this, props));
+
+	    _this.state = { x: 0, y: 0, move: { x: 0, y: 0 } };
+	    return _this;
+	  }
+
+	  _createClass(Moving, [{
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      document.addEventListener("keyup", this.onKeyUp.bind(this), false);
+	      document.addEventListener("keydown", this.onKeyDown.bind(this), false);
+	      setInterval(function () {
+	        _this2.setState({
+	          x: _this2.state.x + _this2.state.move.x,
+	          y: _this2.state.y + _this2.state.move.y
+	        });
+	        if (_this2.props.onUpdate) {
+	          _this2.props.onUpdate(_this2.state.x, _this2.state.y);
+	        }
+	      }, 0);
+	    }
+	  }, {
+	    key: "onKeyDown",
+	    value: function onKeyDown(e) {
+	      if (e.keyCode === keys.left) {
+	        this.setState({ move: Object.assign({}, this.state.move, { x: -1 }) });
+	      } else if (e.keyCode === keys.up) {
+	        this.setState({ move: Object.assign({}, this.state.move, { y: -1 }) });
+	      } else if (e.keyCode === keys.down) {
+	        this.setState({ move: Object.assign({}, this.state.move, { y: 1 }) });
+	      } else if (e.keyCode === keys.right) {
+	        this.setState({ move: Object.assign({}, this.state.move, { x: 1 }) });
+	      }
+	    }
+	  }, {
+	    key: "onKeyUp",
+	    value: function onKeyUp(e) {
+	      if (e.keyCode === keys.left) {
+	        this.setState({ move: Object.assign({}, this.state.move, { x: 0 }) });
+	      } else if (e.keyCode === keys.up) {
+	        this.setState({ move: Object.assign({}, this.state.move, { y: 0 }) });
+	      } else if (e.keyCode === keys.down) {
+	        this.setState({ move: Object.assign({}, this.state.move, { y: 0 }) });
+	      } else if (e.keyCode === keys.right) {
+	        this.setState({ move: Object.assign({}, this.state.move, { x: 0 }) });
+	      }
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        {
+	          style: {
+	            position: 'absolute', top: this.state.y, left: this.state.x
+	          } },
+	        this.props.children
+	      );
+	    }
+	  }]);
+
+	  return Moving;
+	}(_react2.default.Component);
+
+	module.exports = Moving;
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function Minimap(props) {
+	  var x = props.x;
+	  var y = props.y;
+
+	  x /= 10;
+	  y /= 10;
+	  x += 110;
+	  y += 110;
+	  return _react2.default.createElement(
+	    'svg',
+	    { width: '300', height: '300' },
+	    _react2.default.createElement('rect', { x: '100', y: '100', width: '100', height: '100', fill: 'transparent', style: {
+	        stroke: 'pink',
+	        strokeWidth: 10
+	      } }),
+	    _react2.default.createElement('circle', { cx: x, cy: y, r: '2', fill: 'black' })
+	  );
+	};
+	Minimap.defaultProps = {
+	  x: 0,
+	  y: 0
+	};
+	module.exports = Minimap;
 
 /***/ }
 /******/ ]);
